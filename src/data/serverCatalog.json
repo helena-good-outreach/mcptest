@@ -12777,5 +12777,34 @@
     "logoRetrievedAt": "2026-11-02",
     "logoLicenseNote": "Mallary mark from the publisher's brand asset page on mallary.ai, as stated by the submitter; trademark rights remain with the publisher.",
     "homepageUrl": "https://mallary.ai/social-media-mcp-server"
+  },
+  {
+    "id": "folklore",
+    "name": "Folklore Clinical Variant Interpretation MCP",
+    "url": "https://api.helena.bio/folklore/v1/mcp",
+    "description": "ACMG/AMP germline variant classification, gene profiles, disease associations and scientific literature. Free, read-only Streamable HTTP; no account or API key required.",
+    "category": "Reference",
+    "tags": [
+      "genomics",
+      "bioinformatics",
+      "germline",
+      "acmg-amp",
+      "no-auth"
+    ],
+    "listingSource": {
+      "kind": "publisher",
+      "url": "https://folklore.helena.bio/integrations/mcp"
+    },
+    "transport": "streamable-http",
+    "exactEndpointOnly": true,
+    "requiresOAuth": false,
+    "authType": "none",
+    "logoUrl": "/server-logos/folklore.png",
+    "logoSourceUrl": "https://folklore.helena.bio/images/logos/folklore.png",
+    "logoSourceKind": "official-site",
+    "logoRetrievedAt": "2026-11-04",
+    "logoLicenseNote": "Official Folklore mark from Helena Bioinformatics; trademark rights remain with Helena Bioinformatics. Submitted by the publisher.",
+    "homepageUrl": "https://folklore.helena.bio/integrations/mcp",
+    "sourceUrl": "https://github.com/helena-bioinformatics/folklore-mcp"
   }
 ]
