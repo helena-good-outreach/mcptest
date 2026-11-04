@@ -4082,5 +4082,19 @@
     "message": "Negotiated stateless MCP 2026-07-28 at https://api.helena.bio/folklore/v1/mcp; detected transport streamable-http; authentication none",
     "validatedUrl": "https://api.helena.bio/folklore/v1/mcp",
     "protocolVersion": "2026-07-28"
+  },
+  {
+    "serverId": "pattorelay",
+    "status": "online",
+    "transport": "unknown",
+    "authType": "oauth",
+    "requiresOAuth": true,
+    "protocolEra": "unknown",
+    "checkedAt": "2026-11-04T06:43:38.747Z",
+    "message": "Authentication challenge at https://pattorelay.com/mcp returned HTTP 401; endpoint was reachable but did not complete an MCP probe; authentication oauth",
+    "validatedUrl": "https://pattorelay.com/mcp",
+    "authorizationServers": [
+      "https://pattorelay.com"
+    ]
   }
 ]

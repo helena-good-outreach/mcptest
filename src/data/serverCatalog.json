@@ -12810,5 +12810,30 @@
     "logoLicenseNote": "Official Folklore mark from Helena Bioinformatics; trademark rights remain with Helena Bioinformatics. Submitted by the publisher.",
     "homepageUrl": "https://folklore.helena.bio/integrations/mcp",
     "sourceUrl": "https://github.com/helena-bioinformatics/folklore-mcp"
+  },
+  {
+    "id": "pattorelay",
+    "name": "Patto",
+    "url": "https://pattorelay.com/mcp",
+    "browserAccess": "proxy-required",
+    "description": "Remote MCP server for PR and B2B outreach: contacts, organizations, campaigns, prospects, email drafts, replies and follow-up dates. Uses OAuth with protected resource metadata; bring your own AI assistant.",
+    "category": "CRM",
+    "tags": [
+      "crm",
+      "community-submission",
+      "oauth"
+    ],
+    "listingSource": {
+      "kind": "community-submission",
+      "url": "https://pattorelay.com"
+    },
+    "transport": "streamable-http",
+    "requiresOAuth": true,
+    "authType": "oauth",
+    "logoUrl": "/server-logos/pattorelay.svg",
+    "logoSourceKind": "generated-fallback",
+    "logoRetrievedAt": "2026-11-04",
+    "logoLicenseNote": "Locally generated PA monogram for a community submission; it is not an official Patto mark.",
+    "homepageUrl": "https://pattorelay.com"
   }
 ]
