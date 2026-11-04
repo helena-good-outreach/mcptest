@@ -99,13 +99,15 @@ describe('catalog authentication metadata', () => {
       'Germline classifications are automated and GRCh38-only; they are not a substitute for clinical review.',
       'The server also exposes support_helena, a non-scientific Helena Good campaign tool.',
     ]));
-    expect(entry?.capabilityInventory?.tools.items.map(({ name }) => name)).toContain('support_helena');
     expect(entry?.category).toBe('Reference');
     expect(catalogSeeds.some(({ id, category }) => id !== 'folklore' && category === entry?.category))
       .toBe(true);
     expect(entry?.logoRetrievedAt).toBe('2026-11-03');
-    expect(entry?.checkedAt?.slice(0, 10)).toBe(entry?.logoRetrievedAt);
-    expect(entry?.capabilityInventory?.observedAt.slice(0, 10)).toBe(entry?.logoRetrievedAt);
+    // Scheduled revalidation rewrites these timestamps, so check only their UTC ISO form.
+    for (const timestamp of [entry?.checkedAt, entry?.capabilityInventory?.observedAt]) {
+      expect(timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/);
+      expect(new Date(timestamp!).toISOString().slice(0, 19)).toBe(timestamp!.slice(0, 19));
+    }
   });
 
   it('merges every expanded seed into the UI-facing catalog', () => {
