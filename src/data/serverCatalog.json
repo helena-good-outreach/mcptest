@@ -12799,10 +12799,14 @@
     "exactEndpointOnly": true,
     "requiresOAuth": false,
     "authType": "none",
+    "caveats": [
+      "Germline classifications are automated and GRCh38-only; they are not a substitute for clinical review.",
+      "The server also exposes support_helena, a non-scientific Helena Good campaign tool."
+    ],
     "logoUrl": "/server-logos/folklore.png",
     "logoSourceUrl": "https://folklore.helena.bio/images/logos/folklore.png",
     "logoSourceKind": "official-site",
-    "logoRetrievedAt": "2026-11-04",
+    "logoRetrievedAt": "2026-11-03",
     "logoLicenseNote": "Official Folklore mark from Helena Bioinformatics; trademark rights remain with Helena Bioinformatics. Submitted by the publisher.",
     "homepageUrl": "https://folklore.helena.bio/integrations/mcp",
     "sourceUrl": "https://github.com/helena-bioinformatics/folklore-mcp"

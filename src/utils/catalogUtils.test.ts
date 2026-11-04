@@ -84,6 +84,30 @@ describe('catalog authentication metadata', () => {
       .toEqual([expectedId]);
   });
 
+  it('flags large catalog size changes for review without pinning an exact count', () => {
+    // Update only after reviewing an intentional bulk addition or removal.
+    // Keep this baseline independent of the seed so accidental truncation is caught.
+    const reviewedCatalogSize = 297;
+    const allowedChange = 0.1;
+    expect(catalogSeeds.length).toBeGreaterThanOrEqual(reviewedCatalogSize * (1 - allowedChange));
+    expect(catalogSeeds.length).toBeLessThanOrEqual(reviewedCatalogSize * (1 + allowedChange));
+  });
+
+  it('preserves Folklore caveats, established category, and UTC provenance in the catalog', () => {
+    const entry = getCatalogServers().find(({ id }) => id === 'folklore');
+    expect(entry?.caveats).toEqual(expect.arrayContaining([
+      'Germline classifications are automated and GRCh38-only; they are not a substitute for clinical review.',
+      'The server also exposes support_helena, a non-scientific Helena Good campaign tool.',
+    ]));
+    expect(entry?.capabilityInventory?.tools.items.map(({ name }) => name)).toContain('support_helena');
+    expect(entry?.category).toBe('Reference');
+    expect(catalogSeeds.some(({ id, category }) => id !== 'folklore' && category === entry?.category))
+      .toBe(true);
+    expect(entry?.logoRetrievedAt).toBe('2026-11-03');
+    expect(entry?.checkedAt?.slice(0, 10)).toBe(entry?.logoRetrievedAt);
+    expect(entry?.capabilityInventory?.observedAt.slice(0, 10)).toBe(entry?.logoRetrievedAt);
+  });
+
   it('merges every expanded seed into the UI-facing catalog', () => {
     const catalog = getCatalogServers();
 
