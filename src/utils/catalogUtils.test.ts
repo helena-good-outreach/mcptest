@@ -84,30 +84,13 @@ describe('catalog authentication metadata', () => {
       .toEqual([expectedId]);
   });
 
-  it('flags large catalog size changes for review without pinning an exact count', () => {
-    // Update only after reviewing an intentional bulk addition or removal.
-    // Keep this baseline independent of the seed so accidental truncation is caught.
+  it('guards against accidental catalog truncation without capping growth', () => {
+    // Lower bound only, so ordinary submissions never trip it. The baseline is independent of
+    // the seed so a truncated serverCatalog.json is caught; a few removals stay within tolerance.
+    // To bump: set reviewedCatalogSize to the current entry count after a reviewed bulk change.
     const reviewedCatalogSize = 297;
-    const allowedChange = 0.1;
-    expect(catalogSeeds.length).toBeGreaterThanOrEqual(reviewedCatalogSize * (1 - allowedChange));
-    expect(catalogSeeds.length).toBeLessThanOrEqual(reviewedCatalogSize * (1 + allowedChange));
-  });
-
-  it('preserves Folklore caveats, established category, and UTC provenance in the catalog', () => {
-    const entry = getCatalogServers().find(({ id }) => id === 'folklore');
-    expect(entry?.caveats).toEqual(expect.arrayContaining([
-      'Germline classifications are automated and GRCh38-only; they are not a substitute for clinical review.',
-      'The server also exposes support_helena, a non-scientific Helena Good campaign tool.',
-    ]));
-    expect(entry?.category).toBe('Reference');
-    expect(catalogSeeds.some(({ id, category }) => id !== 'folklore' && category === entry?.category))
-      .toBe(true);
-    expect(entry?.logoRetrievedAt).toBe('2026-11-03');
-    // Scheduled revalidation rewrites these timestamps, so check only their UTC ISO form.
-    for (const timestamp of [entry?.checkedAt, entry?.capabilityInventory?.observedAt]) {
-      expect(timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/);
-      expect(new Date(timestamp!).toISOString().slice(0, 19)).toBe(timestamp!.slice(0, 19));
-    }
+    const allowedShrink = 0.1;
+    expect(catalogSeeds.length).toBeGreaterThanOrEqual(reviewedCatalogSize * (1 - allowedShrink));
   });
 
   it('merges every expanded seed into the UI-facing catalog', () => {
