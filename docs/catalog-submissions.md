@@ -119,7 +119,7 @@ To list a server by hand, open a pull request against `master` that changes the 
 2. **`public/server-logos/<id>.svg` or `.png`**: the logo file. See the logo rules below.
 3. **`src/data/catalogValidation.json`** and **`src/data/catalogCapabilities.json`**: regenerate these with `npm run validate-catalog`. Do not edit them by hand.
 
-Catalog tests in **`src/utils/catalogUtils.test.ts`** derive expected membership from the seed. No exact catalog-size update is needed for a submission. A separate size guard allows changes within 10% of a reviewed baseline of 297 entries; if a deliberate bulk change exceeds that range, review the additions/removals and update the baseline in the same PR.
+Catalog tests in **`src/utils/catalogUtils.test.ts`** derive expected membership from the seed. No exact catalog-size update is needed for a submission. A separate size guard only checks a lower bound: it fails if the catalog shrinks more than 10% below a reviewed baseline of 297 entries, to catch accidental truncation. Growth is never capped, so ordinary submissions do not need to touch it; if a deliberate bulk removal goes below that bound, review the removals and update the baseline in the same PR.
 
 ## Validation
 
